@@ -1,52 +1,402 @@
+HTML
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101827">
-  <meta name="description" content="ChattpG - Your Global AI Assistant">
-  <title>ChattpG | Global AI Assistant</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080d18">
+<title>AI CAR KEY.tn</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#080d18;--panel:#101b2e;--blue:#168cff;--cyan:#27d8ff;--text:#f4f8ff;--muted:#9aabc2;--line:#263954}
+body{margin:0;font-family:Arial,Tahoma,sans-serif;background:radial-gradient(circle at top,#142c4d,#080d18 55%);color:var(--text);min-height:100vh}
+header{padding:17px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);background:#080d18;position:sticky;top:0;z-index:5}
+.logo{font-size:22px;font-weight:bold}.logo span{color:var(--cyan)}
+select,input{background:#091323;color:white;border:1px solid var(--line);padding:13px;border-radius:9px;width:100%;font-size:15px}
+header select{width:auto}
+main{max-width:950px;margin:auto;padding:20px 15px 50px}
+.hero{text-align:center;padding:35px 10px}
+.hero h1{font-size:clamp(29px,6vw,46px);margin:10px 0}
+.hero h1 span{color:var(--cyan)}
+.hero p{color:var(--muted);line-height:1.8}
+.tag{display:inline-block;padding:7px 13px;border:1px solid #168cff66;border-radius:30px;color:var(--cyan);font-size:12px}
+.panel{background:linear-gradient(145deg,#111e32,#0c1422);border:1px solid var(--line);border-radius:16px;padding:20px;margin:17px 0;box-shadow:0 10px 30px #0003}
+h2{font-size:20px;margin:0 0 15px}
+label{display:block;color:var(--muted);font-size:13px;margin:13px 0 7px}
+button{border:0;border-radius:9px;padding:13px 18px;background:linear-gradient(90deg,#0876ed,#18baff);color:white;font-weight:bold;font-size:15px;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+.search{width:100%;margin-top:16px}
+.result{display:none}.result.visible{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-top:15px}
+.info{background:#091323;border:1px solid var(--line);padding:13px;border-radius:10px;overflow-wrap:anywhere}
+.info small{display:block;color:var(--muted);margin-bottom:7px}
+.status{padding:12px;border-radius:9px;margin-top:15px;line-height:1.7;font-size:13px}
+.warning{background:#ffb02016;border:1px solid #ffb02066;color:#ffd27b}
+.success{background:#16b98116;border:1px solid #16b98166;color:#8ce9c2}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.feature{background:#091323;border:1px solid var(--line);padding:17px;border-radius:12px}
+.feature h3{margin:8px 0}.feature p{color:var(--muted);font-size:13px;line-height:1.7}
+.note{color:var(--muted);font-size:13px;line-height:1.8}
+#dbStatus{font-size:12px;color:var(--muted);margin-top:10px}
+footer{text-align:center;border-top:1px solid var(--line);padding:24px;color:var(--muted);font-size:12px;line-height:1.8}
+@media(max-width:480px){header{padding:13px}.logo{font-size:18px}.panel{padding:16px}}
+</style>
 </head>
 <body>
 
-  <main class="container">
-    <header>
-      <div class="logo">✦ ChattpG</div>
-      <span class="status">● Online</span>
-    </header>
+<header>
+<div class="logo">AI <span>CAR KEY</span>.tn</div>
+<select id="language" aria-label="Language">
+<option value="ar">العربية</option>
+<option value="fr">Français</option>
+<option value="en">English</option>
+</select>
+</header>
 
-    <section class="hero">
-      <div class="eyebrow">YOUR GLOBAL AI ASSISTANT</div>
+<main>
+<section class="hero">
+<div class="tag">SMART AUTOMOTIVE KEY PLATFORM</div>
+<h1 id="heroTitle">مستقبل مفاتيح السيارات <span>يبدأ هنا</span></h1>
+<p id="heroText">منصة للبحث عن معلومات مفاتيح السيارات ومراجعها ومواصفاتها، لمساعدة أصحاب السيارات والمحترفين.</p>
+</section>
 
-      <h1>مرحباً بك في <span>ChattpG</span></h1>
+<section class="panel">
+<h2 id="searchTitle">ابحث عن مفتاح سيارتك</h2>
+<label id="brandLabel" for="brand">الشركة المصنعة</label>
+<select id="brand"><option value="">جاري التحميل...</option></select>
+<label id="modelLabel" for="model">طراز السيارة</label>
+<select id="model" disabled><option value="">اختر الشركة أولاً</option></select>
+<label id="yearLabel" for="year">سنة الصنع</label>
+<select id="year" disabled><option value="">اختر الطراز أولاً</option></select>
+<button class="search" id="searchButton">بحث عن المفتاح</button>
+<div id="dbStatus">جاري تحميل قاعدة البيانات...</div>
+</section>
 
-      <p>
-        مساعدك الذكي العالمي.
-        اسأل، اكتشف، تعلم وابدأ محادثة جديدة.
-      </p>
+<section class="panel result" id="result">
+<h2 id="resultTitle">نتيجة البحث</h2>
+<div id="resultContent"></div>
+</section>
 
-      <div class="chat-box">
-        <input
-          id="userInput"
-          type="text"
-          placeholder="اكتب سؤالك هنا..."
-          autocomplete="off"
-        >
-        <button id="sendButton">إرسال ←</button>
-      </div>
+<section class="panel">
+<h2 id="featuresTitle">خدمات المنصة</h2>
+<div class="features">
+<div class="feature"><div>🔑</div><h3 id="f1Title">معلومات المفاتيح</h3><p id="f1Text">البحث عن أنواع المفاتيح ومراجعها ومواصفاتها.</p></div>
+<div class="feature"><div>🚘</div><h3 id="f2Title">قاعدة بيانات السيارات</h3><p id="f2Text">قاعدة بيانات قابلة للتطوير وإضافة المزيد من السيارات.</p></div>
+<div class="feature"><div>🛡️</div><h3 id="f3Title">معلومات موثوقة</h3><p id="f3Text">إظهار حالة التحقق لتجنب عرض معلومات غير مؤكدة.</p></div>
+</div>
+</section>
 
-      <div id="response" class="response">
-        أهلاً بك! كيف يمكنني مساعدتك اليوم؟
-      </div>
-    </section>
+<section class="panel">
+<h2 id="smartTitle">SMART CAR CONTROL</h2>
+<p id="smartText" class="note">واجهة تجريبية لاستكشاف خدمات التحكم بالسيارة مستقبلاً.</p>
+<div class="grid">
+<button id="unlockButton">فتح الأبواب</button>
+<button id="lockButton">غلق الأبواب</button>
+<button id="compatibilityButton">فحص التوافق</button>
+</div>
+<div id="controlResult" class="note" style="margin-top:14px"></div>
+<p id="controlNote" class="note">هذه الأزرار تجريبية فقط. لا يوجد اتصال فعلي بالسيارة ولا يتم إرسال أوامر فتح أو غلق.</p>
+</section>
 
-    <footer>
-      © 2026 ChattpG. All rights reserved.
-    </footer>
-  </main>
+<section class="panel">
+<h2 id="proTitle">منطقة المحترفين</h2>
+<p id="proText" class="note">مساحة مخصصة لفنيي مفاتيح السيارات.</p>
+<p id="proNote" class="note">الخدمات المتقدمة قيد التطوير.</p>
+</section>
+</main>
 
-  <script src="script.js"></script>
+<footer id="footerText">AI CAR KEY.tn — Technology you can trust.</footer>
+
+<script>
+"use strict";
+
+const $=id=>document.getElementById(id);
+let database=null;
+let records=[];
+let lang="ar";
+
+const translations={
+ar:{
+heroTitle:'مستقبل مفاتيح السيارات <span>يبدأ هنا</span>',
+heroText:"منصة للبحث عن معلومات مفاتيح السيارات ومراجعها ومواصفاتها، لمساعدة أصحاب السيارات والمحترفين.",
+searchTitle:"ابحث عن مفتاح سيارتك",brandLabel:"الشركة المصنعة",modelLabel:"طراز السيارة",yearLabel:"سنة الصنع",searchButton:"بحث عن المفتاح",
+featuresTitle:"خدمات المنصة",f1Title:"معلومات المفاتيح",f1Text:"البحث عن أنواع المفاتيح ومراجعها ومواصفاتها.",
+f2Title:"قاعدة بيانات السيارات",f2Text:"قاعدة بيانات قابلة للتطوير وإضافة المزيد من السيارات.",
+f3Title:"معلومات موثوقة",f3Text:"إظهار حالة التحقق لتجنب عرض معلومات غير مؤكدة.",
+smartTitle:"التحكم الذكي بالسيارة",smartText:"واجهة تجريبية لاستكشاف خدمات التحكم بالسيارة مستقبلاً.",
+unlockButton:"فتح الأبواب",lockButton:"غلق الأبواب",compatibilityButton:"فحص التوافق",
+controlNote:"هذه الأزرار تجريبية فقط. لا يوجد اتصال فعلي بالسيارة ولا يتم إرسال أوامر فتح أو غلق.",
+proTitle:"منطقة المحترفين",proText:"مساحة مخصصة لفنيي مفاتيح السيارات.",proNote:"الخدمات المتقدمة قيد التطوير.",
+footerText:"AI CAR KEY.tn — تكنولوجيا يمكنك الوثوق بها.",
+loading:"جاري تحميل قاعدة البيانات...",loadError:"تعذر تحميل database.json. تأكد من وجود الملف بجانب index.html.",
+brandPlaceholder:"اختر الشركة",modelPlaceholder:"اختر الطراز",yearPlaceholder:"اختر السنة",
+chooseAll:"يرجى اختيار الشركة والطراز وسنة الصنع.",noData:"لا توجد بيانات مطابقة في قاعدة البيانات.",
+found:"السيارة",keyType:"نوع المفتاح",reference:"مرجع المفتاح",chassis:"رقم الهيكل",buttons:"عدد الأزرار",
+transponder:"الشريحة الإلكترونية",blade:"شفرة النصل",frequency:"التردد",status:"حالة البيانات",
+verified:"تم التحقق من هذه البيانات.",unverified:"هذه البيانات أولية وتحتاج إلى تحقق فني قبل اعتماد التوافق.",
+notAvailable:"غير متوفر",source:"المصدر",sourceOpen:"فتح المصدر",
+demoUnlock:"محاكاة فقط: لم يتم إرسال أمر فتح.",demoLock:"محاكاة فقط: لم يتم إرسال أمر غلق.",demoCompatibility:"لا يوجد اتصال رسمي بالسيارة حالياً."
+},
+en:{
+heroTitle:'The future of car keys <span>starts here</span>',
+heroText:"A platform to search vehicle key information, references and specifications.",
+searchTitle:"Find your car key",brandLabel:"Manufacturer",modelLabel:"Car model",yearLabel:"Year",searchButton:"Search",
+featuresTitle:"Platform services",f1Title:"Key information",f1Text:"Search key types, references and specifications.",
+f2Title:"Vehicle database",f2Text:"An expandable database of vehicle information.",
+f3Title:"Verified information",f3Text:"Verification status helps identify unconfirmed information.",
+smartTitle:"SMART CAR CONTROL",smartText:"A demonstration interface for future vehicle-control services.",
+unlockButton:"Unlock doors",lockButton:"Lock doors",compatibilityButton:"Check compatibility",
+controlNote:"Demo only. No actual vehicle connection or lock commands are available.",
+proTitle:"Professional area",proText:"A dedicated space for car key technicians.",proNote:"Advanced services are under development.",
+footerText:"AI CAR KEY.tn — Technology you can trust.",
+loading:"Loading database...",loadError:"Could not load database.json. Check that it is beside index.html.",
+brandPlaceholder:"Choose manufacturer",modelPlaceholder:"Choose model",yearPlaceholder:"Choose year",
+chooseAll:"Please select manufacturer, model and year.",noData:"No matching data found.",
+found:"Vehicle",keyType:"Key type",reference:"Key reference",chassis:"Chassis",buttons:"Number of buttons",
+transponder:"Transponder",blade:"Blade",frequency:"Frequency",status:"Data status",
+verified:"This information is verified.",unverified:"Preliminary data. Technical verification is required before confirming compatibility.",
+notAvailable:"Not available",source:"Source",sourceOpen:"Open source",
+demoUnlock:"Simulation only: no unlock command was sent.",demoLock:"Simulation only: no lock command was sent.",demoCompatibility:"No official vehicle connection is available."
+},
+fr:{
+heroTitle:'Le futur des clés auto <span>commence ici</span>',
+heroText:"Une plateforme pour rechercher les informations et références des clés automobiles.",
+searchTitle:"Rechercher votre clé",brandLabel:"Constructeur",modelLabel:"Modèle",yearLabel:"Année",searchButton:"Rechercher",
+featuresTitle:"Services de la plateforme",f1Title:"Informations clés",f1Text:"Rechercher les types, références et spécifications des clés.",
+f2Title:"Base de données",f2Text:"Une base de données évolutive des véhicules.",
+f3Title:"Informations vérifiées",f3Text:"Afficher le statut de vérification des informations.",
+smartTitle:"SMART CAR CONTROL",smartText:"Interface de démonstration des futurs services de contrôle automobile.",
+unlockButton:"Ouvrir les portes",lockButton:"Fermer les portes",compatibilityButton:"Vérifier la compatibilité",
+controlNote:"Démonstration uniquement. Aucune connexion réelle au véhicule ni commande envoyée.",
+proTitle:"Espace professionnel",proText:"Un espace dédié aux techniciens de clés automobiles.",proNote:"Les services avancés sont en développement.",
+footerText:"AI CAR KEY.tn — Une technologie de confiance.",
+loading:"Chargement de la base de données...",loadError:"Impossible de charger database.json. Vérifiez que le fichier est à côté de index.html.",
+brandPlaceholder:"Choisir le constructeur",modelPlaceholder:"Choisir le modèle",yearPlaceholder:"Choisir l'année",
+chooseAll:"Veuillez choisir le constructeur, le modèle et l'année.",noData:"Aucune donnée correspondante.",
+found:"Véhicule",keyType:"Type de clé",reference:"Référence",chassis:"Châssis",buttons:"Nombre de boutons",
+transponder:"Transpondeur",blade:"Lame",frequency:"Fréquence",status:"État des données",
+verified:"Ces informations sont vérifiées.",unverified:"Données préliminaires nécessitant une vérification technique.",
+notAvailable:"Non disponible",source:"Source",sourceOpen:"Ouvrir la source",
+demoUnlock:"Simulation uniquement : aucune commande d'ouverture envoyée.",demoLock:"Simulation uniquement : aucune commande de fermeture envoyée.",demoCompatibility:"Aucune connexion officielle au véhicule n'est disponible."
+}
+};
+
+function t(key){
+return translations[lang][key]||translations.ar[key]||key;
+}
+
+function setText(id,key){
+$(id).textContent=t(key);
+}
+
+function escapeHTML(value){
+return String(value).replace(/[&<>"']/g,c=>({
+"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[c]));
+}
+
+function getBrand(r){return r.brand||r.make||r.manufacturer||""}
+function getModel(r){return r.model||r.name||""}
+
+function getYears(r){
+if(Array.isArray(r.years))return r.years.map(String);
+if(r.year)return [String(r.year)];
+let start=r.year_start??r.yearStart??r.start_year;
+let end=r.year_end??r.yearEnd??r.end_year;
+if(start&&end){
+let a=[];
+for(let y=Number(start);y<=Number(end)&&y-start<60;y++)a.push(String(y));
+return a;
+}
+return [];
+}
+
+function getField(r,names){
+for(const name of names){
+if(r[name]!==undefined&&r[name]!==null&&r[name]!=="")return r[name];
+}
+return "";
+}
+
+function getRecords(data){
+if(Array.isArray(data))return data;
+for(const key of ["records","cars","vehicles","database"]){
+if(Array.isArray(data[key]))return data[key];
+}
+return [];
+}
+
+function addOptions(select,values,placeholder){
+select.innerHTML="";
+const first=document.createElement("option");
+first.value="";
+first.textContent=placeholder;
+select.appendChild(first);
+[...new Set(values)].sort((a,b)=>String(a).localeCompare(String(b))).forEach(value=>{
+const option=document.createElement("option");
+option.value=String(value);
+option.textContent=String(value);
+select.appendChild(option);
+});
+}
+
+function fillBrands(){
+const brands=records.map(getBrand).filter(Boolean);
+addOptions($("brand"),brands,t("brandPlaceholder"));
+$("brand").disabled=brands.length===0;
+}
+
+function updateModels(){
+const brand=$("brand").value;
+const models=records.filter(r=>getBrand(r)===brand).map(getModel).filter(Boolean);
+addOptions($("model"),models,t("modelPlaceholder"));
+$("model").disabled=models.length===0;
+addOptions($("year"),[],t("yearPlaceholder"));
+$("year").disabled=true;
+}
+
+function updateYears(){
+const brand=$("brand").value;
+const model=$("model").value;
+const years=records.filter(r=>getBrand(r)===brand&&getModel(r)===model).flatMap(getYears);
+addOptions($("year"),years,t("yearPlaceholder"));
+$("year").disabled=years.length===0;
+}
+
+function getSource(record){
+const docs=database?.source_documents;
+const id=record.source_id||record.sourceId;
+if(!id||!docs)return null;
+if(Array.isArray(docs))return docs.find(d=>d.id===id)||null;
+return docs[id]||null;
+}
+
+function displayField(label,value){
+if(value===""||value===null||value===undefined)return "";
+return `<div class="info"><small>${escapeHTML(t(label))}</small><strong>${escapeHTML(value)}</strong></div>`;
+}
+
+function searchCar(){
+const brand=$("brand").value;
+const model=$("model").value;
+const year=$("year").value;
+const result=$("result");
+const content=$("resultContent");
+
+result.classList.add("visible");
+
+if(!brand||!model||!year){
+content.textContent=t("chooseAll");
+return;
+}
+
+const record=records.find(r=>
+getBrand(r)===brand&&getModel(r)===model&&getYears(r).includes(year)
+);
+
+if(!record){
+content.textContent=t("noData");
+return;
+}
+
+const fields=[
+["keyType",["key_type","keyType","type"]],
+["reference",["reference","key_reference","keyReference","ref"]],
+["chassis",["chassis","chassis_code","chassisCode"]],
+["buttons",["buttons","button_count","buttonCount"]],
+["transponder",["transponder","chip","transponder_type","transponderType"]],
+["blade",["blade","blade_type","bladeType"]],
+["frequency",["frequency","remote_frequency","remoteFrequency"]]
+];
+
+let html=`<p><strong>${escapeHTML(t("found"))}: ${escapeHTML(brand)} ${escapeHTML(model)} (${escapeHTML(year)})</strong></p><div class="grid">`;
+
+fields.forEach(([label,names])=>{
+html+=displayField(label,getField(record,names));
+});
+
+html+="</div>";
+
+const source=getSource(record);
+if(source){
+const url=source.url||source.link||source.pdf;
+if(url&&/^https?:\/\//i.test(url)){
+html+=`<p><a href="${escapeHTML(url)}" target="_blank" rel="noopener">${escapeHTML(t("sourceOpen"))}</a></p>`;
+}
+}
+
+if(record.status==="verified"){
+html+=`<div class="status success">${escapeHTML(t("verified"))}</div>`;
+}else{
+html+=`<div class="status warning">${escapeHTML(t("unverified"))}</div>`;
+}
+
+content.innerHTML=html;
+}
+
+function applyLanguage(){
+lang=$("language").value;
+document.documentElement.lang=lang;
+document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+
+const keys={
+heroTitle:"heroTitle",heroText:"heroText",searchTitle:"searchTitle",
+brandLabel:"brandLabel",modelLabel:"modelLabel",yearLabel:"yearLabel",
+searchButton:"searchButton",featuresTitle:"featuresTitle",
+f1Title:"f1Title",f1Text:"f1Text",f2Title:"f2Title",f2Text:"f2Text",
+f3Title:"f3Title",f3Text:"f3Text",smartTitle:"smartTitle",
+smartText:"smartText",unlockButton:"unlockButton",lockButton:"lockButton",
+compatibilityButton:"compatibilityButton",controlNote:"controlNote",
+proTitle:"proTitle",proText:"proText",proNote:"proNote",footerText:"footerText"
+};
+
+Object.entries(keys).forEach(([id,key])=>{
+if(id==="heroTitle")$(id).innerHTML=t(key);
+else setText(id,key);
+});
+
+if(records.length){
+fillBrands();
+updateModels();
+}
+}
+
+async function loadDatabase(){
+try{
+const response=await fetch("./database.json",{cache:"no-store"});
+if(!response.ok)throw new Error("HTTP "+response.status);
+database=await response.json();
+records=getRecords(database);
+
+if(!records.length)throw new Error("No records found");
+
+fillBrands();
+$("dbStatus").textContent=records.length+" records loaded.";
+}catch(error){
+console.error(error);
+$("dbStatus").textContent=t("loadError");
+$("brand").innerHTML=`<option value="">${escapeHTML(t("loadError"))}</option>`;
+}
+}
+
+$("brand").addEventListener("change",updateModels);
+$("model").addEventListener("change",updateYears);
+$("searchButton").addEventListener("click",searchCar);
+$("language").addEventListener("change",applyLanguage);
+
+$("unlockButton").addEventListener("click",()=>{
+$("controlResult").textContent=t("demoUnlock");
+});
+$("lockButton").addEventListener("click",()=>{
+$("controlResult").textContent=t("demoLock");
+});
+$("compatibilityButton").addEventListener("click",()=>{
+$("controlResult").textContent=t("demoCompatibility");
+});
+
+applyLanguage();
+loadDatabase();
+</script>
 </body>
 </html>

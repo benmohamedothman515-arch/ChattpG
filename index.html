@@ -1,402 +1,504 @@
-HTML
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080d18">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#087cf0">
 <title>AI CAR KEY.tn</title>
+
 <style>
-*{box-sizing:border-box}
-:root{--bg:#080d18;--panel:#101b2e;--blue:#168cff;--cyan:#27d8ff;--text:#f4f8ff;--muted:#9aabc2;--line:#263954}
-body{margin:0;font-family:Arial,Tahoma,sans-serif;background:radial-gradient(circle at top,#142c4d,#080d18 55%);color:var(--text);min-height:100vh}
-header{padding:17px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);background:#080d18;position:sticky;top:0;z-index:5}
-.logo{font-size:22px;font-weight:bold}.logo span{color:var(--cyan)}
-select,input{background:#091323;color:white;border:1px solid var(--line);padding:13px;border-radius:9px;width:100%;font-size:15px}
-header select{width:auto}
-main{max-width:950px;margin:auto;padding:20px 15px 50px}
-.hero{text-align:center;padding:35px 10px}
-.hero h1{font-size:clamp(29px,6vw,46px);margin:10px 0}
-.hero h1 span{color:var(--cyan)}
-.hero p{color:var(--muted);line-height:1.8}
-.tag{display:inline-block;padding:7px 13px;border:1px solid #168cff66;border-radius:30px;color:var(--cyan);font-size:12px}
-.panel{background:linear-gradient(145deg,#111e32,#0c1422);border:1px solid var(--line);border-radius:16px;padding:20px;margin:17px 0;box-shadow:0 10px 30px #0003}
-h2{font-size:20px;margin:0 0 15px}
-label{display:block;color:var(--muted);font-size:13px;margin:13px 0 7px}
-button{border:0;border-radius:9px;padding:13px 18px;background:linear-gradient(90deg,#0876ed,#18baff);color:white;font-weight:bold;font-size:15px;cursor:pointer}
-button:disabled{opacity:.5;cursor:not-allowed}
-.search{width:100%;margin-top:16px}
-.result{display:none}.result.visible{display:block}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-top:15px}
-.info{background:#091323;border:1px solid var(--line);padding:13px;border-radius:10px;overflow-wrap:anywhere}
-.info small{display:block;color:var(--muted);margin-bottom:7px}
-.status{padding:12px;border-radius:9px;margin-top:15px;line-height:1.7;font-size:13px}
-.warning{background:#ffb02016;border:1px solid #ffb02066;color:#ffd27b}
-.success{background:#16b98116;border:1px solid #16b98166;color:#8ce9c2}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
-.feature{background:#091323;border:1px solid var(--line);padding:17px;border-radius:12px}
-.feature h3{margin:8px 0}.feature p{color:var(--muted);font-size:13px;line-height:1.7}
-.note{color:var(--muted);font-size:13px;line-height:1.8}
-#dbStatus{font-size:12px;color:var(--muted);margin-top:10px}
-footer{text-align:center;border-top:1px solid var(--line);padding:24px;color:var(--muted);font-size:12px;line-height:1.8}
-@media(max-width:480px){header{padding:13px}.logo{font-size:18px}.panel{padding:16px}}
+:root {
+  --blue:#087cf0;
+  --dark:#0755a5;
+  --bg:#f3f8ff;
+  --white:#fff;
+  --text:#183653;
+  --muted:#71849a;
+  --border:#dce9f7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Tahoma,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+header{background:white;padding:15px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.logo{font-size:23px;font-weight:900;color:var(--blue)}
+.logo span{color:var(--text)}
+#language{padding:9px;border:1px solid var(--border);border-radius:9px;background:white}
+.hero{text-align:center;padding:48px 18px;background:linear-gradient(130deg,#e4f1ff,#fff)}
+.hero h1{font-size:clamp(27px,5vw,42px);color:var(--dark);margin-bottom:8px}
+.hero p{color:var(--muted);max-width:650px;margin:auto}
+.container{width:92%;max-width:1000px;margin:25px auto}
+.card{background:white;border:1px solid var(--border);border-radius:17px;padding:23px;margin-bottom:20px;box-shadow:0 7px 25px #164d8010}
+.card h2{color:var(--dark);font-size:21px;margin-bottom:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+label{display:block;font-weight:bold;font-size:14px;margin-bottom:6px}
+select,input{font:inherit}
+.field select,.field input{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fbfdff;color:var(--text)}
+button{border:0;border-radius:10px;padding:12px 20px;background:var(--blue);color:white;font-size:15px;font-weight:bold;cursor:pointer}
+button:hover{background:var(--dark)}
+.main-button{width:100%;margin-top:18px}
+.result{display:none;margin-top:20px;padding:18px;background:#f6faff;border:1px solid var(--border);border-radius:12px}
+.result h3{color:var(--dark);margin-bottom:10px}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px}
+.info{padding:10px;background:white;border:1px solid var(--border);border-radius:9px;overflow-wrap:anywhere}
+.info strong{display:block;color:var(--muted);font-size:12px}
+.status{display:inline-block;padding:5px 12px;border-radius:20px;font-size:13px;font-weight:bold;margin-bottom:10px}
+.pending{background:#fff1d6;color:#8a5900}
+.verified{background:#def7e9;color:#087447}
+.notice{padding:12px;border-radius:9px;background:#fff5df;color:#79510b;margin-top:12px;font-size:14px}
+.blue-notice{background:#edf6ff;color:#245782}
+.upload{display:block;padding:20px;border:2px dashed #a9cbed;border-radius:12px;background:#f6faff;text-align:center;color:var(--dark);cursor:pointer}
+.upload input{display:none}
+#preview{display:none;max-width:100%;max-height:220px;margin:15px auto;border-radius:10px}
+.control{padding:17px;border:1px solid #cfe4fb;border-radius:12px;background:#f4f9ff;margin-top:12px}
+.control h3{color:var(--dark);margin-bottom:8px}
+.control button{background:#9aafc5;cursor:not-allowed}
+.small{font-size:13px;color:var(--muted)}
+#error{color:#b42318;margin-top:10px}
+footer{text-align:center;background:white;border-top:1px solid var(--border);padding:25px;color:var(--muted);margin-top:35px}
+@media(max-width:500px){.card{padding:16px}.hero{padding:35px 14px}}
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="logo">AI <span>CAR KEY</span>.tn</div>
-<select id="language" aria-label="Language">
-<option value="ar">العربية</option>
-<option value="fr">Français</option>
-<option value="en">English</option>
-</select>
+  <div class="logo">AI <span>CAR KEY</span>.tn</div>
+  <select id="language" aria-label="Language">
+    <option value="ar">العربية</option>
+    <option value="fr">Français</option>
+    <option value="en">English</option>
+  </select>
 </header>
 
-<main>
 <section class="hero">
-<div class="tag">SMART AUTOMOTIVE KEY PLATFORM</div>
-<h1 id="heroTitle">مستقبل مفاتيح السيارات <span>يبدأ هنا</span></h1>
-<p id="heroText">منصة للبحث عن معلومات مفاتيح السيارات ومراجعها ومواصفاتها، لمساعدة أصحاب السيارات والمحترفين.</p>
+  <h1 id="heroTitle">مستقبل مفاتيح السيارات يبدأ هنا</h1>
+  <p id="heroText">منصة ذكية للبحث عن معلومات مفاتيح السيارات والتحقق من توافقها.</p>
 </section>
 
-<section class="panel">
-<h2 id="searchTitle">ابحث عن مفتاح سيارتك</h2>
-<label id="brandLabel" for="brand">الشركة المصنعة</label>
-<select id="brand"><option value="">جاري التحميل...</option></select>
-<label id="modelLabel" for="model">طراز السيارة</label>
-<select id="model" disabled><option value="">اختر الشركة أولاً</option></select>
-<label id="yearLabel" for="year">سنة الصنع</label>
-<select id="year" disabled><option value="">اختر الطراز أولاً</option></select>
-<button class="search" id="searchButton">بحث عن المفتاح</button>
-<div id="dbStatus">جاري تحميل قاعدة البيانات...</div>
+<main class="container">
+
+<section class="card">
+  <h2 id="searchTitle">البحث عن مفتاح السيارة</h2>
+
+  <div class="grid">
+    <div class="field">
+      <label id="brandLabel">ماركة السيارة</label>
+      <select id="brand"><option value="">اختر الماركة</option></select>
+    </div>
+    <div class="field">
+      <label id="modelLabel">موديل السيارة</label>
+      <select id="model" disabled><option value="">اختر الموديل</option></select>
+    </div>
+    <div class="field">
+      <label id="yearLabel">سنة الصنع</label>
+      <select id="year" disabled><option value="">اختر السنة</option></select>
+    </div>
+  </div>
+
+  <button class="main-button" id="searchButton">🔍 البحث عن معلومات المفتاح</button>
+  <p id="error"></p>
+  <div id="result" class="result"></div>
 </section>
 
-<section class="panel result" id="result">
-<h2 id="resultTitle">نتيجة البحث</h2>
-<div id="resultContent"></div>
+<section class="card">
+  <h2 id="photoTitle">التعرف على المفتاح بالصورة</h2>
+  <p id="photoText" class="small">اختر صورة المفتاح لمعاينتها. التعرف الآلي على الصورة غير متاح حاليًا.</p>
+  <label class="upload">
+    📷 <span id="uploadText">اضغط لاختيار صورة المفتاح</span>
+    <input type="file" id="keyPhoto" accept="image/*">
+  </label>
+  <img id="preview" alt="معاينة صورة المفتاح">
 </section>
 
-<section class="panel">
-<h2 id="featuresTitle">خدمات المنصة</h2>
-<div class="features">
-<div class="feature"><div>🔑</div><h3 id="f1Title">معلومات المفاتيح</h3><p id="f1Text">البحث عن أنواع المفاتيح ومراجعها ومواصفاتها.</p></div>
-<div class="feature"><div>🚘</div><h3 id="f2Title">قاعدة بيانات السيارات</h3><p id="f2Text">قاعدة بيانات قابلة للتطوير وإضافة المزيد من السيارات.</p></div>
-<div class="feature"><div>🛡️</div><h3 id="f3Title">معلومات موثوقة</h3><p id="f3Text">إظهار حالة التحقق لتجنب عرض معلومات غير مؤكدة.</p></div>
-</div>
+<section class="card">
+  <h2 id="smartTitle">SMART VEHICLE CONTROL</h2>
+  <p id="smartIntro">اكتشف خدمات الاتصال والتحكم الرسمية التي توفرها شركات السيارات.</p>
+
+  <div class="control">
+    <h3>Mazda Connected Services</h3>
+    <p id="mazdaText">تتوفر بعض خدمات التحكم عن بعد في سيارات Mazda الحديثة المتوافقة، حسب الطراز والسوق والاشتراك.</p>
+    <p class="small" id="mazdaNote">يجب التحقق من رقم الهيكل VIN ومن توفر الخدمة في بلد السيارة.</p>
+    <p style="margin-top:10px">
+      <a href="https://www.mazda.com/" target="_blank" rel="noopener">موقع Mazda الرسمي</a>
+    </p>
+  </div>
+
+  <div class="notice blue-notice" id="controlNotice">
+    هذا القسم معلوماتي حاليًا. التطبيق غير متصل بأنظمة الشركات ولا يرسل أوامر فتح أو غلق السيارة.
+    التحكم الحقيقي يتطلب تكاملًا رسميًا ومصرحًا به من الشركة المصنعة.
+  </div>
 </section>
 
-<section class="panel">
-<h2 id="smartTitle">SMART CAR CONTROL</h2>
-<p id="smartText" class="note">واجهة تجريبية لاستكشاف خدمات التحكم بالسيارة مستقبلاً.</p>
-<div class="grid">
-<button id="unlockButton">فتح الأبواب</button>
-<button id="lockButton">غلق الأبواب</button>
-<button id="compatibilityButton">فحص التوافق</button>
-</div>
-<div id="controlResult" class="note" style="margin-top:14px"></div>
-<p id="controlNote" class="note">هذه الأزرار تجريبية فقط. لا يوجد اتصال فعلي بالسيارة ولا يتم إرسال أوامر فتح أو غلق.</p>
+<section class="card">
+  <h2 id="proTitle">منطقة المحترفين</h2>
+  <p id="proText">مساحة مخصصة لفنيي مفاتيح السيارات للاطلاع على بيانات المفاتيح ومراجعها.</p>
+  <p class="small" id="proNote">يجب التحقق من كل معلومة قبل اعتمادها في العمل.</p>
 </section>
 
-<section class="panel">
-<h2 id="proTitle">منطقة المحترفين</h2>
-<p id="proText" class="note">مساحة مخصصة لفنيي مفاتيح السيارات.</p>
-<p id="proNote" class="note">الخدمات المتقدمة قيد التطوير.</p>
+<section class="card">
+  <h2 id="aboutTitle">حول AI CAR KEY.tn</h2>
+  <p id="aboutText">هدفنا تسهيل الوصول إلى معلومات مفاتيح السيارات وتحديد التوافق بطريقة واضحة وموثوقة.</p>
 </section>
+
 </main>
 
-<footer id="footerText">AI CAR KEY.tn — Technology you can trust.</footer>
+<footer>
+  <strong>AI CAR KEY.tn</strong>
+  <p>© 2026 - All rights reserved</p>
+  <p class="small" id="footerText">منصة معلوماتية مستقلة وليست تابعة لشركات السيارات.</p>
+</footer>
 
 <script>
-"use strict";
-
-const $=id=>document.getElementById(id);
-let database=null;
-let records=[];
-let lang="ar";
-
-const translations={
+const translations = {
 ar:{
-heroTitle:'مستقبل مفاتيح السيارات <span>يبدأ هنا</span>',
-heroText:"منصة للبحث عن معلومات مفاتيح السيارات ومراجعها ومواصفاتها، لمساعدة أصحاب السيارات والمحترفين.",
-searchTitle:"ابحث عن مفتاح سيارتك",brandLabel:"الشركة المصنعة",modelLabel:"طراز السيارة",yearLabel:"سنة الصنع",searchButton:"بحث عن المفتاح",
-featuresTitle:"خدمات المنصة",f1Title:"معلومات المفاتيح",f1Text:"البحث عن أنواع المفاتيح ومراجعها ومواصفاتها.",
-f2Title:"قاعدة بيانات السيارات",f2Text:"قاعدة بيانات قابلة للتطوير وإضافة المزيد من السيارات.",
-f3Title:"معلومات موثوقة",f3Text:"إظهار حالة التحقق لتجنب عرض معلومات غير مؤكدة.",
-smartTitle:"التحكم الذكي بالسيارة",smartText:"واجهة تجريبية لاستكشاف خدمات التحكم بالسيارة مستقبلاً.",
-unlockButton:"فتح الأبواب",lockButton:"غلق الأبواب",compatibilityButton:"فحص التوافق",
-controlNote:"هذه الأزرار تجريبية فقط. لا يوجد اتصال فعلي بالسيارة ولا يتم إرسال أوامر فتح أو غلق.",
-proTitle:"منطقة المحترفين",proText:"مساحة مخصصة لفنيي مفاتيح السيارات.",proNote:"الخدمات المتقدمة قيد التطوير.",
-footerText:"AI CAR KEY.tn — تكنولوجيا يمكنك الوثوق بها.",
-loading:"جاري تحميل قاعدة البيانات...",loadError:"تعذر تحميل database.json. تأكد من وجود الملف بجانب index.html.",
-brandPlaceholder:"اختر الشركة",modelPlaceholder:"اختر الطراز",yearPlaceholder:"اختر السنة",
-chooseAll:"يرجى اختيار الشركة والطراز وسنة الصنع.",noData:"لا توجد بيانات مطابقة في قاعدة البيانات.",
-found:"السيارة",keyType:"نوع المفتاح",reference:"مرجع المفتاح",chassis:"رقم الهيكل",buttons:"عدد الأزرار",
-transponder:"الشريحة الإلكترونية",blade:"شفرة النصل",frequency:"التردد",status:"حالة البيانات",
-verified:"تم التحقق من هذه البيانات.",unverified:"هذه البيانات أولية وتحتاج إلى تحقق فني قبل اعتماد التوافق.",
-notAvailable:"غير متوفر",source:"المصدر",sourceOpen:"فتح المصدر",
-demoUnlock:"محاكاة فقط: لم يتم إرسال أمر فتح.",demoLock:"محاكاة فقط: لم يتم إرسال أمر غلق.",demoCompatibility:"لا يوجد اتصال رسمي بالسيارة حالياً."
-},
-en:{
-heroTitle:'The future of car keys <span>starts here</span>',
-heroText:"A platform to search vehicle key information, references and specifications.",
-searchTitle:"Find your car key",brandLabel:"Manufacturer",modelLabel:"Car model",yearLabel:"Year",searchButton:"Search",
-featuresTitle:"Platform services",f1Title:"Key information",f1Text:"Search key types, references and specifications.",
-f2Title:"Vehicle database",f2Text:"An expandable database of vehicle information.",
-f3Title:"Verified information",f3Text:"Verification status helps identify unconfirmed information.",
-smartTitle:"SMART CAR CONTROL",smartText:"A demonstration interface for future vehicle-control services.",
-unlockButton:"Unlock doors",lockButton:"Lock doors",compatibilityButton:"Check compatibility",
-controlNote:"Demo only. No actual vehicle connection or lock commands are available.",
-proTitle:"Professional area",proText:"A dedicated space for car key technicians.",proNote:"Advanced services are under development.",
-footerText:"AI CAR KEY.tn — Technology you can trust.",
-loading:"Loading database...",loadError:"Could not load database.json. Check that it is beside index.html.",
-brandPlaceholder:"Choose manufacturer",modelPlaceholder:"Choose model",yearPlaceholder:"Choose year",
-chooseAll:"Please select manufacturer, model and year.",noData:"No matching data found.",
-found:"Vehicle",keyType:"Key type",reference:"Key reference",chassis:"Chassis",buttons:"Number of buttons",
-transponder:"Transponder",blade:"Blade",frequency:"Frequency",status:"Data status",
-verified:"This information is verified.",unverified:"Preliminary data. Technical verification is required before confirming compatibility.",
-notAvailable:"Not available",source:"Source",sourceOpen:"Open source",
-demoUnlock:"Simulation only: no unlock command was sent.",demoLock:"Simulation only: no lock command was sent.",demoCompatibility:"No official vehicle connection is available."
+heroTitle:"مستقبل مفاتيح السيارات يبدأ هنا",
+heroText:"منصة ذكية للبحث عن معلومات مفاتيح السيارات والتحقق من توافقها.",
+searchTitle:"البحث عن مفتاح السيارة",
+brandLabel:"ماركة السيارة",modelLabel:"موديل السيارة",yearLabel:"سنة الصنع",
+brandPlaceholder:"اختر الماركة",modelPlaceholder:"اختر الموديل",yearPlaceholder:"اختر السنة",
+searchButton:"🔍 البحث عن معلومات المفتاح",
+photoTitle:"التعرف على المفتاح بالصورة",
+photoText:"اختر صورة المفتاح لمعاينتها. التعرف الآلي على الصورة غير متاح حاليًا.",
+uploadText:"اضغط لاختيار صورة المفتاح",
+smartTitle:"التحكم الذكي بالسيارة",
+smartIntro:"اكتشف خدمات الاتصال والتحكم الرسمية التي توفرها شركات السيارات.",
+mazdaText:"تتوفر بعض خدمات التحكم عن بعد في سيارات Mazda الحديثة المتوافقة، حسب الطراز والسوق والاشتراك.",
+mazdaNote:"يجب التحقق من رقم الهيكل VIN ومن توفر الخدمة في بلد السيارة.",
+controlNotice:"هذا القسم معلوماتي حاليًا. التطبيق غير متصل بأنظمة الشركات ولا يرسل أوامر فتح أو غلق السيارة. التحكم الحقيقي يتطلب تكاملًا رسميًا ومصرحًا به من الشركة المصنعة.",
+proTitle:"منطقة المحترفين",
+proText:"مساحة مخصصة لفنيي مفاتيح السيارات للاطلاع على بيانات المفاتيح ومراجعها.",
+proNote:"يجب التحقق من كل معلومة قبل اعتمادها في العمل.",
+aboutTitle:"حول AI CAR KEY.tn",
+aboutText:"هدفنا تسهيل الوصول إلى معلومات مفاتيح السيارات وتحديد التوافق بطريقة واضحة وموثوقة.",
+footerText:"منصة معلوماتية مستقلة وليست تابعة لشركات السيارات.",
+loading:"جار تحميل قاعدة البيانات...",
+loadError:"تعذر تحميل قاعدة البيانات. تأكد من وجود ملف database.json بجانب index.html.",
+noResult:"لم يتم العثور على سجل مطابق في قاعدة البيانات.",
+pending:"هذه البيانات أولية وتحتاج إلى التحقق من المصدر قبل اعتمادها.",
+verified:"تم وضع علامة التحقق على هذا السجل في قاعدة البيانات.",
+noYear:"لا توجد سنة مطابقة لهذا الاختيار.",
+photoReady:"تم اختيار الصورة للمعاينة.",
+keyType:"نوع المفتاح",reference:"مرجع المفتاح",chassis:"رمز الهيكل",buttons:"عدد الأزرار",transponder:"الشريحة الإلكترونية",blade:"شفرة النصل",frequency:"التردد",status:"حالة التحقق",brand:"الماركة",model:"الموديل",years:"سنوات الصنع"
 },
 fr:{
-heroTitle:'Le futur des clés auto <span>commence ici</span>',
-heroText:"Une plateforme pour rechercher les informations et références des clés automobiles.",
-searchTitle:"Rechercher votre clé",brandLabel:"Constructeur",modelLabel:"Modèle",yearLabel:"Année",searchButton:"Rechercher",
-featuresTitle:"Services de la plateforme",f1Title:"Informations clés",f1Text:"Rechercher les types, références et spécifications des clés.",
-f2Title:"Base de données",f2Text:"Une base de données évolutive des véhicules.",
-f3Title:"Informations vérifiées",f3Text:"Afficher le statut de vérification des informations.",
-smartTitle:"SMART CAR CONTROL",smartText:"Interface de démonstration des futurs services de contrôle automobile.",
-unlockButton:"Ouvrir les portes",lockButton:"Fermer les portes",compatibilityButton:"Vérifier la compatibilité",
-controlNote:"Démonstration uniquement. Aucune connexion réelle au véhicule ni commande envoyée.",
-proTitle:"Espace professionnel",proText:"Un espace dédié aux techniciens de clés automobiles.",proNote:"Les services avancés sont en développement.",
-footerText:"AI CAR KEY.tn — Une technologie de confiance.",
-loading:"Chargement de la base de données...",loadError:"Impossible de charger database.json. Vérifiez que le fichier est à côté de index.html.",
-brandPlaceholder:"Choisir le constructeur",modelPlaceholder:"Choisir le modèle",yearPlaceholder:"Choisir l'année",
-chooseAll:"Veuillez choisir le constructeur, le modèle et l'année.",noData:"Aucune donnée correspondante.",
-found:"Véhicule",keyType:"Type de clé",reference:"Référence",chassis:"Châssis",buttons:"Nombre de boutons",
-transponder:"Transpondeur",blade:"Lame",frequency:"Fréquence",status:"État des données",
-verified:"Ces informations sont vérifiées.",unverified:"Données préliminaires nécessitant une vérification technique.",
-notAvailable:"Non disponible",source:"Source",sourceOpen:"Ouvrir la source",
-demoUnlock:"Simulation uniquement : aucune commande d'ouverture envoyée.",demoLock:"Simulation uniquement : aucune commande de fermeture envoyée.",demoCompatibility:"Aucune connexion officielle au véhicule n'est disponible."
+heroTitle:"Le futur des clés automobiles commence ici",
+heroText:"Une plateforme intelligente pour rechercher les informations des clés automobiles.",
+searchTitle:"Recherche de clé automobile",
+brandLabel:"Marque",modelLabel:"Modèle",yearLabel:"Année",
+brandPlaceholder:"Choisir la marque",modelPlaceholder:"Choisir le modèle",yearPlaceholder:"Choisir l'année",
+searchButton:"🔍 Rechercher les informations",
+photoTitle:"Identification par photo",
+photoText:"Choisissez une photo pour l'afficher. La reconnaissance automatique n'est pas encore disponible.",
+uploadText:"Choisir une photo de clé",
+smartTitle:"CONTRÔLE INTELLIGENT DU VÉHICULE",
+smartIntro:"Découvrez les services officiels des constructeurs automobiles.",
+mazdaText:"Certains véhicules Mazda récents compatibles proposent des services de commande à distance, selon le modèle et le marché.",
+mazdaNote:"Vérifiez le VIN et la disponibilité du service dans le pays du véhicule.",
+controlNotice:"Cette section est informative. L'application n'est pas connectée aux systèmes des constructeurs et n'envoie aucune commande.",
+proTitle:"Espace professionnel",
+proText:"Espace destiné aux techniciens de clés automobiles.",
+proNote:"Chaque information doit être vérifiée avant utilisation.",
+aboutTitle:"À propos de AI CAR KEY.tn",
+aboutText:"Notre objectif est de faciliter l'accès aux informations et à la compatibilité des clés automobiles.",
+footerText:"Plateforme indépendante, non affiliée aux constructeurs.",
+loading:"Chargement de la base de données...",
+loadError:"Impossible de charger database.json.",
+noResult:"Aucun résultat correspondant.",
+pending:"Données préliminaires à vérifier auprès de la source.",
+verified:"Cette fiche est marquée comme vérifiée dans la base de données.",
+noYear:"Aucune année correspondante.",
+photoReady:"Photo sélectionnée.",
+keyType:"Type de clé",reference:"Référence",chassis:"Châssis",buttons:"Nombre de boutons",transponder:"Transpondeur",blade:"Lame",frequency:"Fréquence",status:"Vérification",brand:"Marque",model:"Modèle",years:"Années"
+},
+en:{
+heroTitle:"The future of car keys starts here",
+heroText:"A smart platform to search vehicle key information and compatibility.",
+searchTitle:"Search vehicle key",
+brandLabel:"Vehicle brand",modelLabel:"Vehicle model",yearLabel:"Manufacturing year",
+brandPlaceholder:"Choose brand",modelPlaceholder:"Choose model",yearPlaceholder:"Choose year",
+searchButton:"🔍 Search key information",
+photoTitle:"Key photo preview",
+photoText:"Choose a key photo to preview. Automatic image recognition is not available yet.",
+uploadText:"Choose a key photo",
+smartTitle:"SMART VEHICLE CONTROL",
+smartIntro:"Discover official connectivity and control services offered by car manufacturers.",
+mazdaText:"Some compatible recent Mazda vehicles offer remote services depending on model, market and subscription.",
+mazdaNote:"Verify the VIN and service availability in the vehicle's country.",
+controlNotice:"This section is informational. The app is not connected to manufacturer systems and does not send lock or unlock commands.",
+proTitle:"Professional Area",
+proText:"A dedicated space for automotive key technicians.",
+proNote:"Verify every detail before relying on it.",
+aboutTitle:"About AI CAR KEY.tn",
+aboutText:"Our goal is to make vehicle key information and compatibility easier to access.",
+footerText:"Independent information platform, not affiliated with car manufacturers.",
+loading:"Loading database...",
+loadError:"Could not load database.json.",
+noResult:"No matching record found.",
+pending:"Preliminary data. Verify with the source before relying on it.",
+verified:"This record is marked as verified in the database.",
+noYear:"No matching year found.",
+photoReady:"Photo selected.",
+keyType:"Key type",reference:"Key reference",chassis:"Chassis",buttons:"Buttons",transponder:"Transponder",blade:"Blade",frequency:"Frequency",status:"Verification",brand:"Brand",model:"Model",years:"Years"
 }
 };
 
-function t(key){
-return translations[lang][key]||translations.ar[key]||key;
+let records = [];
+let lang = "ar";
+
+const $ = id => document.getElementById(id);
+const brandSelect = $("brand");
+const modelSelect = $("model");
+const yearSelect = $("year");
+const result = $("result");
+
+function tr(key){return translations[lang][key] || key;}
+
+function setLanguage(value){
+  lang=value;
+  document.documentElement.lang=value;
+  document.documentElement.dir=value==="ar"?"rtl":"ltr";
+
+  Object.keys(translations[value]).forEach(key=>{
+    const element=$(key);
+    if(element) element.textContent=translations[value][key];
+  });
+
+  $("heroTitle").textContent=tr("heroTitle");
+  $("heroText").textContent=tr("heroText");
+  $("searchTitle").textContent=tr("searchTitle");
+  $("brandLabel").textContent=tr("brandLabel");
+  $("modelLabel").textContent=tr("modelLabel");
+  $("yearLabel").textContent=tr("yearLabel");
+  $("searchButton").textContent=tr("searchButton");
+  $("photoTitle").textContent=tr("photoTitle");
+  $("photoText").textContent=tr("photoText");
+  $("uploadText").textContent=tr("uploadText");
+  $("smartTitle").textContent=tr("smartTitle");
+  $("smartIntro").textContent=tr("smartIntro");
+  $("mazdaText").textContent=tr("mazdaText");
+  $("mazdaNote").textContent=tr("mazdaNote");
+  $("controlNotice").textContent=tr("controlNotice");
+  $("proTitle").textContent=tr("proTitle");
+  $("proText").textContent=tr("proText");
+  $("proNote").textContent=tr("proNote");
+  $("aboutTitle").textContent=tr("aboutTitle");
+  $("aboutText").textContent=tr("aboutText");
+  $("footerText").textContent=tr("footerText");
+
+  fillBrands();
+  resetResult();
 }
 
-function setText(id,key){
-$(id).textContent=t(key);
+function resetResult(){
+  result.style.display="none";
+  result.textContent="";
+  $("error").textContent="";
 }
 
-function escapeHTML(value){
-return String(value).replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-}[c]));
+function getField(record, names){
+  for(const name of names){
+    if(record[name]!==undefined && record[name]!==null && record[name]!==""){
+      return record[name];
+    }
+  }
+  return "—";
 }
 
-function getBrand(r){return r.brand||r.make||r.manufacturer||""}
-function getModel(r){return r.model||r.name||""}
-
-function getYears(r){
-if(Array.isArray(r.years))return r.years.map(String);
-if(r.year)return [String(r.year)];
-let start=r.year_start??r.yearStart??r.start_year;
-let end=r.year_end??r.yearEnd??r.end_year;
-if(start&&end){
-let a=[];
-for(let y=Number(start);y<=Number(end)&&y-start<60;y++)a.push(String(y));
-return a;
-}
-return [];
-}
-
-function getField(r,names){
-for(const name of names){
-if(r[name]!==undefined&&r[name]!==null&&r[name]!=="")return r[name];
-}
-return "";
-}
-
-function getRecords(data){
-if(Array.isArray(data))return data;
-for(const key of ["records","cars","vehicles","database"]){
-if(Array.isArray(data[key]))return data[key];
-}
-return [];
-}
-
-function addOptions(select,values,placeholder){
-select.innerHTML="";
-const first=document.createElement("option");
-first.value="";
-first.textContent=placeholder;
-select.appendChild(first);
-[...new Set(values)].sort((a,b)=>String(a).localeCompare(String(b))).forEach(value=>{
-const option=document.createElement("option");
-option.value=String(value);
-option.textContent=String(value);
-select.appendChild(option);
-});
+function getYears(record){
+  const value=getField(record,["years","year","production_years"]);
+  if(Array.isArray(value)) return value.join(", ");
+  return String(value);
 }
 
 function fillBrands(){
-const brands=records.map(getBrand).filter(Boolean);
-addOptions($("brand"),brands,t("brandPlaceholder"));
-$("brand").disabled=brands.length===0;
+  const previous=brandSelect.value;
+  brandSelect.replaceChildren();
+  const first=document.createElement("option");
+  first.value="";
+  first.textContent=tr("brandPlaceholder");
+  brandSelect.appendChild(first);
+
+  const brands=[...new Set(records.map(r=>r.brand).filter(Boolean))].sort();
+  brands.forEach(brand=>{
+    const option=document.createElement("option");
+    option.value=brand;
+    option.textContent=brand;
+    brandSelect.appendChild(option);
+  });
+  if(brands.includes(previous)) brandSelect.value=previous;
+  fillModels();
 }
 
-function updateModels(){
-const brand=$("brand").value;
-const models=records.filter(r=>getBrand(r)===brand).map(getModel).filter(Boolean);
-addOptions($("model"),models,t("modelPlaceholder"));
-$("model").disabled=models.length===0;
-addOptions($("year"),[],t("yearPlaceholder"));
-$("year").disabled=true;
+function fillModels(){
+  const brand=brandSelect.value;
+  modelSelect.replaceChildren();
+  const first=document.createElement("option");
+  first.value="";
+  first.textContent=tr("modelPlaceholder");
+  modelSelect.appendChild(first);
+
+  const models=[...new Set(records.filter(r=>r.brand===brand).map(r=>r.model).filter(Boolean))].sort();
+  models.forEach(model=>{
+    const option=document.createElement("option");
+    option.value=model;
+    option.textContent=model;
+    modelSelect.appendChild(option);
+  });
+  modelSelect.disabled=!brand;
+  fillYears();
 }
 
-function updateYears(){
-const brand=$("brand").value;
-const model=$("model").value;
-const years=records.filter(r=>getBrand(r)===brand&&getModel(r)===model).flatMap(getYears);
-addOptions($("year"),years,t("yearPlaceholder"));
-$("year").disabled=years.length===0;
+function fillYears(){
+  const brand=brandSelect.value;
+  const model=modelSelect.value;
+  yearSelect.replaceChildren();
+
+  const first=document.createElement("option");
+  first.value="";
+  first.textContent=tr("yearPlaceholder");
+  yearSelect.appendChild(first);
+
+  const matching=records.filter(r=>r.brand===brand && r.model===model);
+  const years=new Set();
+
+  matching.forEach(record=>{
+    const value=getField(record,["years","year","production_years"]);
+    const matches=String(value).match(/\b(?:19|20)\d{2}\b/g)||[];
+    matches.forEach(y=>years.add(y));
+  });
+
+  [...years].sort().forEach(year=>{
+    const option=document.createElement("option");
+    option.value=year;
+    option.textContent=year;
+    yearSelect.appendChild(option);
+  });
+
+  yearSelect.disabled=!brand||!model;
 }
 
-function getSource(record){
-const docs=database?.source_documents;
-const id=record.source_id||record.sourceId;
-if(!id||!docs)return null;
-if(Array.isArray(docs))return docs.find(d=>d.id===id)||null;
-return docs[id]||null;
+function showResult(record){
+  result.replaceChildren();
+  result.style.display="block";
+
+  const heading=document.createElement("h3");
+  heading.textContent=record.brand+" "+record.model;
+  result.appendChild(heading);
+
+  const status=document.createElement("span");
+  const verified=record.status==="verified";
+  status.className="status "+(verified?"verified":"pending");
+  status.textContent=verified?"✓ "+tr("verified"):tr("pending");
+  result.appendChild(status);
+
+  const grid=document.createElement("div");
+  grid.className="info-grid";
+
+  const fields=[
+    ["keyType",["key_type","keyType"]],
+    ["reference",["reference","key_reference"]],
+    ["chassis",["chassis"]],
+    ["buttons",["buttons"]],
+    ["transponder",["transponder"]],
+    ["blade",["blade"]],
+    ["frequency",["frequency"]],
+    ["years",["years","year","production_years"]]
+  ];
+
+  fields.forEach(([label,keys])=>{
+    const box=document.createElement("div");
+    box.className="info";
+    const strong=document.createElement("strong");
+    strong.textContent=tr(label);
+    const value=document.createElement("span");
+    value.textContent=keys[0]==="years"?getYears(record):getField(record,keys);
+    box.append(strong,value);
+    grid.appendChild(box);
+  });
+
+  result.appendChild(grid);
+
+  if(!verified){
+    const note=document.createElement("div");
+    note.className="notice";
+    note.textContent=tr("pending");
+    result.appendChild(note);
+  }
 }
 
-function displayField(label,value){
-if(value===""||value===null||value===undefined)return "";
-return `<div class="info"><small>${escapeHTML(t(label))}</small><strong>${escapeHTML(value)}</strong></div>`;
-}
+function searchRecord(){
+  $("error").textContent="";
+  const brand=brandSelect.value;
+  const model=modelSelect.value;
+  const year=yearSelect.value;
 
-function searchCar(){
-const brand=$("brand").value;
-const model=$("model").value;
-const year=$("year").value;
-const result=$("result");
-const content=$("resultContent");
+  if(!brand||!model||!year){
+    $("error").textContent=tr("noYear");
+    return;
+  }
 
-result.classList.add("visible");
+  const record=records.find(r=>{
+    if(r.brand!==brand||r.model!==model)return false;
+    const years=getYears(r);
+    return years.includes(year);
+  });
 
-if(!brand||!model||!year){
-content.textContent=t("chooseAll");
-return;
-}
-
-const record=records.find(r=>
-getBrand(r)===brand&&getModel(r)===model&&getYears(r).includes(year)
-);
-
-if(!record){
-content.textContent=t("noData");
-return;
-}
-
-const fields=[
-["keyType",["key_type","keyType","type"]],
-["reference",["reference","key_reference","keyReference","ref"]],
-["chassis",["chassis","chassis_code","chassisCode"]],
-["buttons",["buttons","button_count","buttonCount"]],
-["transponder",["transponder","chip","transponder_type","transponderType"]],
-["blade",["blade","blade_type","bladeType"]],
-["frequency",["frequency","remote_frequency","remoteFrequency"]]
-];
-
-let html=`<p><strong>${escapeHTML(t("found"))}: ${escapeHTML(brand)} ${escapeHTML(model)} (${escapeHTML(year)})</strong></p><div class="grid">`;
-
-fields.forEach(([label,names])=>{
-html+=displayField(label,getField(record,names));
-});
-
-html+="</div>";
-
-const source=getSource(record);
-if(source){
-const url=source.url||source.link||source.pdf;
-if(url&&/^https?:\/\//i.test(url)){
-html+=`<p><a href="${escapeHTML(url)}" target="_blank" rel="noopener">${escapeHTML(t("sourceOpen"))}</a></p>`;
-}
-}
-
-if(record.status==="verified"){
-html+=`<div class="status success">${escapeHTML(t("verified"))}</div>`;
-}else{
-html+=`<div class="status warning">${escapeHTML(t("unverified"))}</div>`;
-}
-
-content.innerHTML=html;
-}
-
-function applyLanguage(){
-lang=$("language").value;
-document.documentElement.lang=lang;
-document.documentElement.dir=lang==="ar"?"rtl":"ltr";
-
-const keys={
-heroTitle:"heroTitle",heroText:"heroText",searchTitle:"searchTitle",
-brandLabel:"brandLabel",modelLabel:"modelLabel",yearLabel:"yearLabel",
-searchButton:"searchButton",featuresTitle:"featuresTitle",
-f1Title:"f1Title",f1Text:"f1Text",f2Title:"f2Title",f2Text:"f2Text",
-f3Title:"f3Title",f3Text:"f3Text",smartTitle:"smartTitle",
-smartText:"smartText",unlockButton:"unlockButton",lockButton:"lockButton",
-compatibilityButton:"compatibilityButton",controlNote:"controlNote",
-proTitle:"proTitle",proText:"proText",proNote:"proNote",footerText:"footerText"
-};
-
-Object.entries(keys).forEach(([id,key])=>{
-if(id==="heroTitle")$(id).innerHTML=t(key);
-else setText(id,key);
-});
-
-if(records.length){
-fillBrands();
-updateModels();
-}
+  if(record){
+    showResult(record);
+  }else{
+    result.style.display="block";
+    result.textContent=tr("noResult");
+  }
 }
 
 async function loadDatabase(){
-try{
-const response=await fetch("./database.json",{cache:"no-store"});
-if(!response.ok)throw new Error("HTTP "+response.status);
-database=await response.json();
-records=getRecords(database);
-
-if(!records.length)throw new Error("No records found");
-
-fillBrands();
-$("dbStatus").textContent=records.length+" records loaded.";
-}catch(error){
-console.error(error);
-$("dbStatus").textContent=t("loadError");
-$("brand").innerHTML=`<option value="">${escapeHTML(t("loadError"))}</option>`;
-}
+  $("error").textContent=tr("loading");
+  try{
+    const response=await fetch("./database.json");
+    if(!response.ok) throw new Error("Database not found");
+    const data=await response.json();
+    records=Array.isArray(data)?data:(data.records||[]);
+    if(!Array.isArray(records)) throw new Error("Invalid database");
+    $("error").textContent="";
+    fillBrands();
+  }catch(error){
+    $("error").textContent=tr("loadError");
+  }
 }
 
-$("brand").addEventListener("change",updateModels);
-$("model").addEventListener("change",updateYears);
-$("searchButton").addEventListener("click",searchCar);
-$("language").addEventListener("change",applyLanguage);
-
-$("unlockButton").addEventListener("click",()=>{
-$("controlResult").textContent=t("demoUnlock");
-});
-$("lockButton").addEventListener("click",()=>{
-$("controlResult").textContent=t("demoLock");
-});
-$("compatibilityButton").addEventListener("click",()=>{
-$("controlResult").textContent=t("demoCompatibility");
+brandSelect.addEventListener("change",()=>{
+  resetResult();
+  fillModels();
 });
 
-applyLanguage();
+modelSelect.addEventListener("change",()=>{
+  resetResult();
+  fillYears();
+});
+
+yearSelect.addEventListener("change",resetResult);
+$("searchButton").addEventListener("click",searchRecord);
+
+$("language").addEventListener("change",event=>{
+  setLanguage(event.target.value);
+});
+
+$("keyPhoto").addEventListener("change",event=>{
+  const file=event.target.files[0];
+  if(!file)return;
+  if(!file.type.startsWith("image/"))return;
+
+  const reader=new FileReader();
+  reader.onload=()=>{
+    $("preview").src=reader.result;
+    $("preview").style.display="block";
+  };
+  reader.readAsDataURL(file);
+});
+
+setLanguage("ar");
 loadDatabase();
 </script>
+
 </body>
 </html>

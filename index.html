@@ -1,396 +1,628 @@
 
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#087cf0">
-<title>AI CAR KEY.tn</title>
+<meta name="theme-color" content="#080d18">
+
+<title>ChattpG - Your AI Assistant</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#f3f8ff;color:#183653;line-height:1.7}
-header{background:white;padding:15px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #dce9f7}
-.logo{font-size:24px;font-weight:bold;color:#087cf0}
-.logo span{color:#183653}
-select,input{font:inherit}
-#language{padding:9px;border:1px solid #dce9f7;border-radius:9px}
-.hero{text-align:center;padding:42px 15px;background:linear-gradient(130deg,#dceeff,#fff)}
-.hero h1{color:#0755a5;font-size:30px}
-.hero p{color:#71849a}
-.container{max-width:950px;width:92%;margin:25px auto}
-.card{background:white;padding:22px;border-radius:16px;border:1px solid #dce9f7;box-shadow:0 6px 22px #164d8010;margin-bottom:20px}
-h2,h3{color:#0755a5}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
-label{display:block;font-weight:bold;margin-bottom:6px}
-.field select{width:100%;padding:12px;border:1px solid #dce9f7;border-radius:9px;background:white}
-button{background:#087cf0;color:white;border:0;border-radius:10px;padding:12px 18px;font-weight:bold;font-size:15px;cursor:pointer}
-button:hover{background:#0755a5}
-button:disabled{background:#a9bbce;cursor:not-allowed}
-.main{width:100%;margin-top:18px}
-.result{display:none;margin-top:18px;padding:16px;border-radius:12px;background:#f4f9ff;border:1px solid #dce9f7}
-.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px}
-.info{background:white;padding:10px;border:1px solid #dce9f7;border-radius:9px;overflow-wrap:anywhere}
-.info strong{display:block;color:#71849a;font-size:12px}
-.status{display:inline-block;padding:5px 12px;border-radius:20px;margin:8px 0;font-size:13px}
-.pending{background:#fff1d6;color:#8a5900}
-.verified{background:#def7e9;color:#087b50}
-.notice{background:#edf6ff;color:#245782;padding:13px;border-radius:10px;margin-top:12px;font-size:14px}
-.upload{display:block;padding:20px;text-align:center;border:2px dashed #a9cbed;border-radius:12px;color:#0755a5;background:#f6faff;cursor:pointer}
-.upload input{display:none}
-#preview{display:none;max-width:100%;max-height:220px;margin:15px auto}
-.control{background:linear-gradient(130deg,#edf6ff,#fff);border:1px solid #cfe4fb;border-radius:12px;padding:18px;margin-top:14px}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.small{font-size:13px;color:#71849a}
-#error{color:#b42318}
-footer{text-align:center;background:white;padding:25px;margin-top:35px;color:#71849a}
-a{color:#087cf0}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #080d18;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background: #0d1525;
+  padding: 25px 18px;
+  border-right: 1px solid #202b40;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: bold;
+  color: #55b8ff;
+  margin-bottom: 35px;
+}
+
+.logo span {
+  color: #ffffff;
+}
+
+.new-chat {
+  background: #14243b;
+  color: white;
+  border: 1px solid #294361;
+  padding: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+.new-chat:hover {
+  background: #1b3656;
+}
+
+.sidebar-info {
+  color: #8292a9;
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: auto;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 100vh;
+}
+
+.header {
+  height: 70px;
+  border-bottom: 1px solid #202b40;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+}
+
+.header-title {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.status {
+  color: #43d69a;
+  font-size: 13px;
+}
+
+.chat {
+  flex: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  padding: 35px 25px 20px;
+  overflow-y: auto;
+  min-height: 300px;
+}
+
+.welcome {
+  text-align: center;
+  margin: 65px auto 40px;
+}
+
+.welcome-icon {
+  width: 75px;
+  height: 75px;
+  border-radius: 22px;
+  background: linear-gradient(135deg,#1689ec,#7658ed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  font-size: 35px;
+}
+
+.welcome h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.welcome p {
+  color: #9aabc2;
+  line-height: 1.7;
+}
+
+.suggestions {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 12px;
+  margin-top: 35px;
+}
+
+.suggestion {
+  background: #101b2d;
+  border: 1px solid #263750;
+  padding: 17px;
+  border-radius: 13px;
+  color: #dbe8f7;
+  text-align: left;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.suggestion:hover {
+  border-color: #399fff;
+  background: #14243b;
+}
+
+.message {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  align-items: flex-start;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: #19395d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-content {
+  background: #111d30;
+  padding: 15px 18px;
+  border-radius: 12px;
+  max-width: 85%;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.user-message {
+  justify-content: flex-end;
+}
+
+.user-message .message-content {
+  background: #164c80;
+}
+
+.user-message .avatar {
+  display: none;
+}
+
+.composer-area {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 15px 25px 25px;
+}
+
+.composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  background: #111d30;
+  border: 1px solid #344963;
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.composer textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  resize: none;
+  min-height: 30px;
+  max-height: 150px;
+  font-size: 16px;
+  padding: 8px;
+  font-family: inherit;
+}
+
+.composer textarea::placeholder {
+  color: #8292a9;
+}
+
+.send {
+  width: 43px;
+  height: 43px;
+  background: #1689ec;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.send:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.send:hover {
+  background: #0874d1;
+}
+
+.footer {
+  text-align: center;
+  color: #708198;
+  font-size: 11px;
+  margin-top: 12px;
+}
+
+.typing {
+  color: #8dbef0;
+  padding: 12px;
+}
+
+@media(max-width:700px) {
+  .sidebar {
+    display: none;
+  }
+
+  .header {
+    padding: 0 16px;
+  }
+
+  .chat {
+    padding: 20px 15px;
+  }
+
+  .welcome {
+    margin-top: 45px;
+  }
+
+  .welcome h1 {
+    font-size: 25px;
+  }
+
+  .suggestions {
+    grid-template-columns: 1fr;
+  }
+
+  .composer-area {
+    padding: 10px 12px 18px;
+  }
+
+  .message-content {
+    max-width: 90%;
+  }
+}
 </style>
 </head>
+
 <body>
 
-<header>
-  <div class="logo">AI <span>CAR KEY</span>.tn</div>
-  <select id="language">
-    <option value="ar">العربية</option>
-    <option value="fr">Français</option>
-    <option value="en">English</option>
-  </select>
-</header>
+<div class="app">
 
-<section class="hero">
-  <h1>مستقبل مفاتيح السيارات يبدأ هنا</h1>
-  <p>منصة ذكية لمعلومات مفاتيح السيارات والتوافق والتحكم الذكي.</p>
-</section>
+  <aside class="sidebar">
+    <div class="logo">Chattp<span>G</span></div>
 
-<main class="container">
+    <button class="new-chat" onclick="newChat()">
+      + New Chat
+    </button>
 
-<section class="card">
-  <h2>البحث عن مفتاح السيارة</h2>
-  <div class="grid">
-    <div class="field">
-      <label for="brand">ماركة السيارة</label>
-      <select id="brand">
-        <option value="">اختر الماركة</option>
-      </select>
+    <div class="sidebar-info">
+      ChattpG AI<br>
+      Your intelligent assistant<br><br>
+      © 2026 ChattpG
     </div>
-    <div class="field">
-      <label for="model">الموديل</label>
-      <select id="model" disabled>
-        <option value="">اختر الموديل</option>
-      </select>
+  </aside>
+
+  <main class="main">
+
+    <header class="header">
+      <div class="header-title">ChattpG AI</div>
+      <div class="status">● AI Assistant</div>
+    </header>
+
+    <section class="chat" id="chat">
+
+      <div class="welcome" id="welcome">
+
+        <div class="welcome-icon">✦</div>
+
+        <h1>Welcome to ChattpG</h1>
+
+        <p>
+          Your intelligent assistant for ideas,
+          knowledge and creativity.
+          <br>
+          Ask anything. Discover everything.
+        </p>
+
+        <div class="suggestions">
+
+          <button class="suggestion"
+            onclick="useSuggestion('Explain artificial intelligence')">
+            ✨ Explain artificial intelligence
+          </button>
+
+          <button class="suggestion"
+            onclick="useSuggestion('Help me create a business')">
+            💡 Help me create a business
+          </button>
+
+          <button class="suggestion"
+            onclick="useSuggestion('Teach me something new')">
+            📚 Teach me something new
+          </button>
+
+          <button class="suggestion"
+            onclick="useSuggestion('Write a professional email')">
+            ✍️ Write a professional email
+          </button>
+
+        </div>
+      </div>
+
+    </section>
+
+    <div class="composer-area">
+
+      <form class="composer" id="chatForm">
+
+        <textarea
+          id="messageInput"
+          placeholder="Message ChattpG..."
+          rows="1"
+          required
+        ></textarea>
+
+        <button class="send" id="sendButton" type="submit">
+          ↑
+        </button>
+
+      </form>
+
+      <div class="footer">
+        ChattpG AI can make mistakes. Verify important information.
+      </div>
+
     </div>
-    <div class="field">
-      <label for="year">سنة الصنع</label>
-      <select id="year" disabled>
-        <option value="">اختر السنة</option>
-      </select>
-    </div>
-  </div>
-  <button class="main" id="searchButton">البحث عن المفتاح</button>
-  <p id="error"></p>
-  <div class="result" id="result"></div>
-</section>
 
-<section class="card">
-  <h2>صورة مفتاح السيارة</h2>
-  <p class="small">اختر صورة لمعاينتها. التعرف الآلي على الصور غير متاح بعد.</p>
-  <label class="upload">
-    📷 اختر صورة المفتاح
-    <input type="file" id="photo" accept="image/*">
-  </label>
-  <img id="preview" alt="صورة المفتاح">
-</section>
+  </main>
 
-<section class="card">
-  <h2>SMART VEHICLE CONTROL</h2>
-  <p>التحكم الذكي بالسيارة عن طريق الهاتف.</p>
-
-  <div class="control">
-    <h3>المفتاح الرقمي والتحكم عن بعد</h3>
-    <p>نعمل على ربط التطبيق بخدمات الشركات المصنعة الرسمية للسيارات المتوافقة.</p>
-    <div class="actions">
-      <button disabled>🔒 قفل السيارة</button>
-      <button disabled>🔓 فتح السيارة</button>
-    </div>
-    <div class="notice">
-      هذه الأزرار تجريبية وغير مفعلة. التطبيق لا يتصل بالسيارة ولا يرسل أوامر فتح أو قفل. يلزم تكامل رسمي مع الشركة المصنعة.
-    </div>
-  </div>
-
-  <div class="control">
-    <h3>Mazda Connected Services</h3>
-    <p>تتوفر خدمات متصلة لبعض سيارات Mazda الحديثة حسب الطراز والسوق والاشتراك.</p>
-    <p class="small">يجب التحقق من رقم الهيكل VIN وتوفر الخدمة في بلد السيارة. التطبيق غير متصل بهذه الخدمة.</p>
-    <a href="https://www.mazda.com/" target="_blank" rel="noopener">Mazda Official Website</a>
-  </div>
-</section>
-
-<section class="card">
-  <h2>منطقة المحترفين</h2>
-  <p>مساحة مخصصة لفنيي مفاتيح السيارات للاطلاع على بيانات المفاتيح ومراجعها.</p>
-</section>
-
-<section class="card">
-  <h2>عن AI CAR KEY.tn</h2>
-  <p>منصة مستقلة لمعلومات مفاتيح السيارات والتوافق، مع تطوير خدمات ذكية مستقبلية.</p>
-</section>
-
-</main>
-
-<footer>AI CAR KEY.tn © 2026</footer>
+</div>
 
 <script>
-const $ = id => document.getElementById(id);
 
-let records = [];
+// Cloudflare Worker address
+const API_URL =
+"https://chattpg-ai.benmohamedothman515.workers.dev";
 
-function getRecords(data) {
-  if (Array.isArray(data)) return data;
-  if (data && Array.isArray(data.vehicles)) return data.vehicles;
-  if (data && Array.isArray(data.records)) return data.records;
-  if (data && Array.isArray(data.database)) return data.database;
-  return [];
-}
+// Application state
+let history = [];
+let busy = false;
 
-function getValue(item, keys) {
-  for (const key of keys) {
-    if (item[key] !== undefined && item[key] !== null && item[key] !== "") {
-      return item[key];
-    }
-  }
-  return "";
-}
+const chat = document.getElementById("chat");
+const welcome = document.getElementById("welcome");
+const input = document.getElementById("messageInput");
+const form = document.getElementById("chatForm");
+const sendButton = document.getElementById("sendButton");
 
-function brandOf(item) {
-  return String(getValue(item, ["brand","make","manufacturer"]));
-}
+// Language detection
+function detectLanguage(text) {
 
-function modelOf(item) {
-  return String(getValue(item, ["model","vehicle_model"]));
-}
-
-function yearOf(item) {
-  return String(getValue(item, ["year","production_year","model_year"]));
-}
-
-function fillSelect(select, values, placeholder) {
-  select.innerHTML = "";
-  const first = document.createElement("option");
-  first.value = "";
-  first.textContent = placeholder;
-  select.appendChild(first);
-
-  [...new Set(values.filter(Boolean))].sort().forEach(value => {
-    const option = document.createElement("option");
-    option.value = value;
-    option.textContent = value;
-    select.appendChild(option);
-  });
-}
-
-async function loadDatabase() {
-  $("error").textContent = "جار تحميل قاعدة البيانات...";
-  try {
-    const response = await fetch("./database.json", {cache:"no-store"});
-    if (!response.ok) throw new Error("Database not found");
-
-    const data = await response.json();
-    records = getRecords(data);
-
-    if (!records.length) throw new Error("No records");
-
-    fillSelect(
-      $("brand"),
-      records.map(brandOf),
-      "اختر الماركة"
-    );
-
-    $("error").textContent = "";
-  } catch (error) {
-    $("error").textContent =
-      "تعذر تحميل database.json. تأكد من وجود الملف بجانب index.html وأن صيغة البيانات صحيحة.";
-  }
-}
-
-$("brand").addEventListener("change", function() {
-  const brand = this.value;
-
-  $("model").disabled = !brand;
-  $("year").disabled = true;
-
-  fillSelect(
-    $("model"),
-    records.filter(item => brandOf(item) === brand).map(modelOf),
-    "اختر الموديل"
-  );
-
-  fillSelect($("year"), [], "اختر السنة");
-  $("result").style.display = "none";
-});
-
-$("model").addEventListener("change", function() {
-  const brand = $("brand").value;
-  const model = this.value;
-
-  const matches = records.filter(item =>
-    brandOf(item) === brand && modelOf(item) === model
-  );
-
-  $("year").disabled = !model;
-
-  fillSelect(
-    $("year"),
-    matches.map(yearOf),
-    "اختر السنة"
-  );
-
-  $("result").style.display = "none";
-});
-
-$("searchButton").addEventListener("click", function() {
-  const brand = $("brand").value;
-  const model = $("model").value;
-  const year = $("year").value;
-
-  if (!brand || !model || !year) {
-    $("error").textContent = "يرجى اختيار الماركة والموديل والسنة.";
-    return;
-  }
-
-  const found = records.filter(item =>
-    brandOf(item) === brand &&
-    modelOf(item) === model &&
-    yearOf(item) === year
-  );
-
-  if (!found.length) {
-    $("result").style.display = "block";
-    $("result").textContent = "لا توجد نتيجة مطابقة.";
-    return;
-  }
-
-  const item = found[0];
-  const status = String(getValue(item, ["status","verification_status"]));
-  const isVerified = status.toLowerCase() === "verified";
-
-  const fields = [
-    ["نوع المفتاح",["key_type","keyType"]],
-    ["مرجع المفتاح",["reference","key_reference","part_number"]],
-    ["رمز الهيكل",["chassis","chassis_code"]],
-    ["عدد الأزرار",["buttons","button_count"]],
-    ["الشريحة الإلكترونية",["transponder","chip"]],
-    ["شفرة النصل",["blade","blade_type"]],
-    ["التردد",["frequency"]],
-    ["سنوات الصنع",["years","year_range"]]
-  ];
-
-  let html = `
-    <h3>${escapeHTML(brand)} ${escapeHTML(model)} (${escapeHTML(year)})</h3>
-    <span class="status ${isVerified ? "verified" : "pending"}">
-      ${isVerified ? "تم التحقق من السجل" : "بيانات تحتاج إلى التحقق"}
-    </span>
-    <div class="info-grid">
-  `;
-
-  fields.forEach(([label, keys]) => {
-    const value = getValue(item, keys);
-    if (value !== "") {
-      html += `
-        <div class="info">
-          <strong>${label}</strong>
-          ${escapeHTML(String(value))}
-        </div>
-      `;
-    }
-  });
-
-  html += "</div>";
-
-  if (!isVerified) {
-    html += `<div class="notice">هذه بيانات أولية تحتاج إلى التحقق من مصدر موثوق قبل الاعتماد عليها.</div>`;
-  }
-
-  $("result").innerHTML = html;
-  $("result").style.display = "block";
-  $("error").textContent = "";
-});
-
-function escapeHTML(value) {
-  return value.replace(/[&<>"']/g, char => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-  })[char]);
-}
-
-$("photo").addEventListener("change", function(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  if (!file.type.startsWith("image/")) {
-    alert("يرجى اختيار صورة.");
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    $("preview").src = e.target.result;
-    $("preview").style.display = "block";
-  };
-  reader.readAsDataURL(file);
-});
-
-$("language").addEventListener("change", function() {
-  const language = this.value;
-
-  if (language === "ar") {
+  if (/[\u0600-\u06FF]/.test(text)) {
     document.documentElement.lang = "ar";
     document.documentElement.dir = "rtl";
   } else {
-    document.documentElement.lang = language;
+    document.documentElement.lang = "en";
     document.documentElement.dir = "ltr";
   }
 
-  const translations = {
-    fr: {
-      title:"Le futur des clés automobiles commence ici",
-      search:"Recherche de clé automobile",
-      brand:"Marque du véhicule",
-      model:"Modèle",
-      year:"Année",
-      photo:"Photo de la clé",
-      professional:"Espace professionnel",
-      about:"À propos de AI CAR KEY.tn"
-    },
-    en: {
-      title:"The future of car keys starts here",
-      search:"Search vehicle key",
-      brand:"Vehicle brand",
-      model:"Model",
-      year:"Year",
-      photo:"Vehicle key photo",
-      professional:"Professional area",
-      about:"About AI CAR KEY.tn"
-    }
-  };
+}
 
-  if (language === "ar") {
-    $("hero").textContent = "";
-    location.reload();
-    return;
+// Add a message to the chat
+function addMessage(text, role) {
+
+  if (welcome) {
+    welcome.remove();
   }
 
-  const t = translations[language];
-  document.querySelector(".hero h1").textContent = t.title;
-  document.querySelector(".card h2").textContent = t.search;
-  $("brandLabel").textContent = t.brand;
-  $("modelLabel").textContent = t.model;
-  $("yearLabel").textContent = t.year;
+  const message = document.createElement("div");
+  message.className = "message " +
+    (role === "user" ? "user-message" : "");
+
+  const avatar = document.createElement("div");
+  avatar.className = "avatar";
+  avatar.textContent = role === "user" ? "👤" : "✦";
+
+  const content = document.createElement("div");
+  content.className = "message-content";
+
+  // Safe text rendering
+  content.textContent = text;
+
+  message.appendChild(avatar);
+  message.appendChild(content);
+
+  chat.appendChild(message);
+
+  chat.scrollTop = chat.scrollHeight;
+}
+
+// Loading indicator
+function showTyping() {
+
+  const typing = document.createElement("div");
+  typing.id = "typing";
+  typing.className = "typing";
+  typing.textContent = "ChattpG is thinking...";
+
+  chat.appendChild(typing);
+  chat.scrollTop = chat.scrollHeight;
+
+}
+
+function hideTyping() {
+
+  const typing = document.getElementById("typing");
+
+  if (typing) {
+    typing.remove();
+  }
+
+}
+
+// Send message to AI
+async function sendMessage(text) {
+
+  if (busy || !text.trim()) return;
+
+  busy = true;
+  sendButton.disabled = true;
+
+  detectLanguage(text);
+
+  addMessage(text, "user");
+
+  const previousHistory = history.slice(-10);
+
+  input.value = "";
+  input.style.height = "auto";
+
+  showTyping();
+
+  try {
+
+    const response = await fetch(API_URL, {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        message: text,
+        history: previousHistory
+      })
+
+    });
+
+    const data = await response.json();
+
+    hideTyping();
+
+    if (!response.ok) {
+      throw new Error(
+        data.details || data.error || "AI service error"
+      );
+    }
+
+    if (!data.reply) {
+      throw new Error("Empty AI response");
+    }
+
+    addMessage(data.reply, "assistant");
+
+    history.push(
+      { role: "user", content: text },
+      { role: "assistant", content: data.reply }
+    );
+
+    history = history.slice(-20);
+
+  } catch (error) {
+
+    hideTyping();
+
+    addMessage(
+      "Connection error: " + error.message +
+      "\nPlease check your internet connection and AI server.",
+      "assistant"
+    );
+
+    console.error(error);
+
+  } finally {
+
+    busy = false;
+    sendButton.disabled = false;
+    input.focus();
+
+  }
+
+}
+
+// Form submission
+form.addEventListener("submit", function(event) {
+
+  event.preventDefault();
+
+  sendMessage(input.value.trim());
+
 });
- 
-loadDatabase();
+
+// Suggestions
+function useSuggestion(text) {
+
+  input.value = text;
+  sendMessage(text);
+
+}
+
+// New conversation
+function newChat() {
+
+  history = [];
+
+  chat.innerHTML = `
+    <div class="welcome" id="welcome">
+      <div class="welcome-icon">✦</div>
+      <h1>Welcome to ChattpG</h1>
+      <p>Your intelligent assistant for ideas, knowledge and creativity.</p>
+      <div class="suggestions">
+        <button class="suggestion" onclick="useSuggestion('Explain artificial intelligence')">
+          ✨ Explain artificial intelligence
+        </button>
+        <button class="suggestion" onclick="useSuggestion('Help me create a business')">
+          💡 Help me create a business
+        </button>
+        <button class="suggestion" onclick="useSuggestion('Teach me something new')">
+          📚 Teach me something new
+        </button>
+        <button class="suggestion" onclick="useSuggestion('Write a professional email')">
+          ✍️ Write a professional email
+        </button>
+      </div>
+    </div>
+  `;
+
+}
+
+// Textarea auto resize
+input.addEventListener("input", function() {
+
+  input.style.height = "auto";
+
+  input.style.height =
+    Math.min(input.scrollHeight, 150) + "px";
+
+});
+
+// Enter to send, Shift+Enter for new line
+input.addEventListener("keydown", function(event) {
+
+  if (event.key === "Enter" && !event.shiftKey) {
+
+    event.preventDefault();
+    form.requestSubmit();
+
+  }
+
+});
+
 </script>
 
 </body>
